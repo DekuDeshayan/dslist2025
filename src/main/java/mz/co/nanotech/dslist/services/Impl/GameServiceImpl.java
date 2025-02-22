@@ -1,5 +1,6 @@
 package mz.co.nanotech.dslist.services.Impl;
 
+import mz.co.nanotech.dslist.dto.GameDTO;
 import mz.co.nanotech.dslist.dto.GameMinDTO;
 import mz.co.nanotech.dslist.entities.Game;
 import mz.co.nanotech.dslist.repositories.GameRepository;
@@ -19,14 +20,19 @@ public class GameServiceImpl implements GameService {
         this.repository = repository;
     }
 
-    @Transactional
-    @Override
-    public List<GameMinDTO> findAll() {
-        var result = repository.findAll();
+      @Transactional(readOnly = true)
+      @Override
+      public List<GameMinDTO> findAll() {
+       var result = repository.findAll();
 
        return result.stream().map(GameMinDTO::new).collect(Collectors.toList());
       }
 
+      @Transactional(readOnly = true)
+
+      public GameDTO getGame(Long id){
+       return new GameDTO(repository.findById(id).get());
+      }
 
 
 }

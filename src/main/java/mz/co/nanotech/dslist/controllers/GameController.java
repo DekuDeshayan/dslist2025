@@ -1,10 +1,12 @@
 package mz.co.nanotech.dslist.controllers;
 
 
+import mz.co.nanotech.dslist.dto.GameDTO;
 import mz.co.nanotech.dslist.dto.GameMinDTO;
 import mz.co.nanotech.dslist.entities.Game;
 import mz.co.nanotech.dslist.services.Impl.GameServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +25,11 @@ public class GameController {
     @GetMapping
     public List<GameMinDTO> findAll(){
      return service.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public GameDTO getGame(@PathVariable Long id){
+        return service.getGame(id);
     }
 
 
