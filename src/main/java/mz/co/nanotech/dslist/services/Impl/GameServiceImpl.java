@@ -20,17 +20,24 @@ public class GameServiceImpl implements GameService {
         this.repository = repository;
     }
 
-      @Transactional(readOnly = true)
-      @Override
-      public List<GameMinDTO> findAll() {
+    @Transactional(readOnly = true)
+    @Override
+    public List<GameMinDTO> findAll() {
        var result = repository.findAll();
-
        return result.stream().map(GameMinDTO::new).collect(Collectors.toList());
-      }
+    }
 
-      @Transactional(readOnly = true)
+    @Transactional(readOnly = true)
+    @Override
+    public List<GameMinDTO> findByList(Long listId) {
+        var result = repository.searchByList(listId);
 
-      public GameDTO getGame(Long id){
+        return result.stream().map(GameMinDTO::new).toList();
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public GameDTO getGame(Long id){
        return new GameDTO(repository.findById(id).get());
       }
 

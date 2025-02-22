@@ -8,9 +8,11 @@ import java.util.List;
 
 public interface GameService {
 
-    List<GameMinDTO>  findAll();
-
     GameDTO getGame(Long id);
+    List<GameMinDTO>  findAll();
+    List<GameMinDTO> findByList(Long listId);
+
+
 
 
 
