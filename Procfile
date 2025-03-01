@@ -1,1 +1,0 @@
-web: mvn clean package -DskipTests && java -Dserver.port=$PORT -jar target/*.jar
