@@ -1,6 +1,6 @@
 # Use the Eclipse temurin alpine official image
 # https://hub.docker.com/_/eclipse-temurin
-FROM eclipse-temurin:21-jdk-alpine
+FROM eclipse-temurin:21-jdk
 
 # Create and change to the app directory.
 WORKDIR /app
