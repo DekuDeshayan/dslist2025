@@ -1,12 +1,16 @@
-# Build stage
-FROM eclipse-temurin:21-jdk as builder
-WORKDIR /app
-COPY . .
-RUN chmod +x mvnw  # Fix permissions upfront
-RUN ./mvnw -B -DskipTests clean install
+# Use the Eclipse temurin alpine official image
+# https://hub.docker.com/_/eclipse-temurin
+FROM eclipse-temurin:21-jdk
 
-# Run stage
-FROM eclipse-temurin:21-jre
+# Create and change to the app directory.
 WORKDIR /app
-COPY --from=builder /app/target/*.jar /app/app.jar
-CMD ["java", "-jar", "app.jar"]
+
+# Copy local code to the container image.
+COPY . ./
+
+RUN chmod +x ./mvnw  # Fix permissions upfront
+# Build the app.
+RUN ./mvnw -DoutputFile=target/mvn-dependency-list.log -B -DskipTests clean dependency:list install
+
+# Run the app by dynamically finding the JAR file in the target directory
+CMD ["sh", "-c", "java -jar target/*.jar"]
