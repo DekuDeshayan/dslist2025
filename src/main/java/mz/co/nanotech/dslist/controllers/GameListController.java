@@ -3,14 +3,12 @@ package mz.co.nanotech.dslist.controllers;
 
 import mz.co.nanotech.dslist.dto.GameListDTO;
 import mz.co.nanotech.dslist.dto.GameMinDTO;
+import mz.co.nanotech.dslist.dto.ReplacementDTO;
 import mz.co.nanotech.dslist.services.GameListService;
 import mz.co.nanotech.dslist.services.GameService;
 import mz.co.nanotech.dslist.services.Impl.GameListServiceImpl;
 import mz.co.nanotech.dslist.services.Impl.GameServiceImpl;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,5 +34,12 @@ public class GameListController {
         return gameService.findByList(listId);
     }
 
+    @PostMapping("/{listId}/replacement")
+    public void move(@PathVariable Long listId,
+                     @RequestBody ReplacementDTO payload){
+        service.move(listId,
+                payload.getSourceIndex(),
+                payload.getDestinationIndex());
+    }
 
 }

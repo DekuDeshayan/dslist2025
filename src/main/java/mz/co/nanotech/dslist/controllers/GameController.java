@@ -5,10 +5,7 @@ import mz.co.nanotech.dslist.dto.GameDTO;
 import mz.co.nanotech.dslist.dto.GameMinDTO;
 import mz.co.nanotech.dslist.entities.Game;
 import mz.co.nanotech.dslist.services.Impl.GameServiceImpl;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
